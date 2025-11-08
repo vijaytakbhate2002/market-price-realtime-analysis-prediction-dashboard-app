@@ -10,14 +10,35 @@ logging.basicConfig(
 )
 
 
+
 class BuildTable:
     """
     Reads path from provided folder and return the dataframe
     """
 
-    def __init__(self, read_folder:str, save_folder_path:str) -> None:
+    def __init__(self, read_folder:str, save_folder_path:str, compress_level:int=2) -> None:
         self.read_folder = read_folder
         self.save_folder_path = save_folder_path
+        self.compress_level = compress_level
+
+
+
+    def compressData(self, df:pd.DataFrame) -> pd.DataFrame:
+        """
+        Args:
+            df: dataframe to compress
+            compress_level: compression level (1, 2, 3, 4 etc)
+
+        Description:
+            - compression value decides the size of data if level is 2 then you will get every 2nd row from df,
+            if 3 then every 3rd and soo on.
+            - compress_level is inversely inversely proportional to size of df
+
+        Returns:
+            pd.DataFrame
+        """
+        df = df.iloc[::self.compress_level].reset_index(drop=True)
+        return df
 
 
 
@@ -33,9 +54,13 @@ class BuildTable:
         for file_path in file_paths:
             logging.info(f"Reading and merging file path: {file_path}...")
             if file_path.endswith(".csv"):
-                df = pd.concat([df, pd.read_csv(file_path)], axis=1)
+                temp = pd.read_csv(file_path)
+                temp = self.compressData(temp)
+                df = pd.concat([df, temp], axis='rows')
             elif file_path.endswith(".xlsx"):
-                df = pd.concat([df, pd.read_excel(file_path)], axis=1)
+                temp = pd.read_excel(file_path)
+                temp = self.compressData(temp)
+                df = pd.concat([df, temp], axis='rows')
             else:
                 raise ValueError("Unsupported file type, {}".format(file_path))
         return df
@@ -52,13 +77,22 @@ class BuildTable:
 
 
 
-    def getData(self) -> pd.DataFrame:
+    def getData(self, latest_files:int=None) -> pd.DataFrame:
         """
-        Converts folder files into combined dataframe
+        Args:
+            latest_files: number of latest files to read for conversion
+
+        Description:
+            Converts folder files into combined dataframe
+
+        Returns:
+            None
         """
 
         logging.info("Collecting file paths...")
         file_names = os.listdir(self.read_folder)
+        if latest_files is not None:
+            file_names = file_names[-latest_files:]
         file_paths = [os.path.join(self.read_folder, name) for name in file_names]
         logging.info(f"Reading and merging files from the folder {self.read_folder}...")
         df = self.concatData(file_paths)
@@ -74,6 +108,9 @@ if __name__ == "__main__":
 
     data_builder = BuildTable(
         read_folder=row_read_folder_path,
-        save_folder_path=row_write_folder_path
+        save_folder_path=row_write_folder_path,
+        compress_level=3
+
     )
-    data_builder.getData()
+
+    data_builder.getData(latest_files=15)

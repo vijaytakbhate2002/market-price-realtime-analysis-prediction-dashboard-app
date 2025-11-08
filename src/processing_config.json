@@ -1,0 +1,5 @@
+{
+  "scaler_file_path": "src/processing_metrics/scaler.pkl",
+  "label_encoder_folder_path": "src/processing_metrics/label_encoder_metrics",
+  "one_hot_encoder_file_path": "src/processing_metrics/one_hot.pkl"
+}

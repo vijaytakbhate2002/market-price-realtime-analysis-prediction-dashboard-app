@@ -1,141 +1,55 @@
-Here’s a professional **README.md** for your project 👇
+
+# 📊 Daily Market Prices of Agricultural Commodities in India (2001–2025)
+
+## 🧾 About the Dataset
+This dataset provides **daily market prices of agricultural commodities across India** from **2001 to 2025**.  
+It contains over **75 million records** covering **374 unique commodities** and **1,504 varieties** traded across various **mandis (wholesale markets)**.  
+Commodities include **vegetables, fruits, grains, spices**, and more.
+
+The dataset is **cleaned, deduplicated, and sorted** by date and commodity for easy analysis.
 
 ---
 
-# 🌐 AWS Data Pipeline with EC2 and S3 for API-based Data Processing
+## 📂 Column Schema
 
-## 📖 Overview
-
-This project demonstrates a **cost-optimized data processing pipeline** using **Amazon EC2** and **Amazon S3**.
-An EC2 instance fetches real-time data from an **Indian API**, processes it, and stores only the **converted version** in S3 to reduce storage costs.
-
----
-
-## 🧩 Project Architecture
-
-```
-            +---------------------+
-            |  Indian API Source  |
-            +----------+----------+
-                       |
-                       v
-             +---------+---------+
-             |     EC2 Instance   |
-             |  (Data Fetch &     |
-             |   Conversion)      |
-             +---------+----------+
-                       |
-                       v
-            +----------+----------+
-            |     Amazon S3        |
-            | (Stores Converted     |
-            |  Data Only)           |
-            +-----------------------+
-```
+| Column Name       | Description                                                                 | Type       |
+|--------------------|------------------------------------------------------------------------------|-------------|
+| **State**          | Name of the Indian state where the market is located                        | Province    |
+| **District**       | Name of the district within the state where the market is located           | City        |
+| **Market**         | Name of the specific market (mandi) where the commodity is traded            | String      |
+| **Commodity**      | Name of the agricultural commodity being traded                             | String      |
+| **Variety**        | Specific variety or type of the commodity                                   | String      |
+| **Grade**          | Quality grade of the commodity (e.g., FAQ, Medium, Good)                    | String      |
+| **Arrival_Date**   | Date of price recording (ISO 8601 format: YYYY-MM-DD)                       | Datetime    |
+| **Min_Price**      | Minimum price of the commodity (in INR per quintal)                         | Decimal     |
+| **Max_Price**      | Maximum price of the commodity (in INR per quintal)                         | Decimal     |
+| **Modal_Price**    | Most frequent (modal) price of the commodity (in INR per quintal)           | Decimal     |
+| **Commodity_Code** | Unique code identifier for the commodity                                    | Numeric     |
 
 ---
 
-## 🧠 Data Flow
-
-1. **Raw Data** — Fetched from the external Indian API.
-2. **Converted Data** — Cleaned, formatted, and optimized version saved in S3.
-3. **Processed Data** — Temporarily held during transformation but not stored to minimize cost.
+## 🏛️ Data Source
+Data is sourced from the **Government of India’s Open Data Platform**:  
+[https://data.gov.in/](https://data.gov.in/)
 
 ---
 
-## 💰 Cost Optimization Strategy
-
-* **S3 Standard Storage:** ₹3–₹4/month for 2 GB.
-* **EC2 Outbound Transfer:** ₹7–₹8/GB (~$0.09/GB) for external API calls.
-* **No per-request charge:** AWS only bills for outbound data size.
-* **Only converted data stored:** Reduces storage usage by ~60–70%.
+## ⚖️ License
+**Government Open Data License - India (GODL-India)**  
+You are free to use, share, and adapt the data with proper attribution.
 
 ---
 
-## ⚙️ Components Used
-
-* **Amazon EC2:** Executes scripts to call APIs and process data.
-* **Amazon S3:** Stores converted data.
-* **AWS IAM:** Controls permissions for EC2 → S3 access.
-* **Python / Boto3:** For automation and API integration.
-
----
-
-## 🚀 Setup Instructions
-
-1. **Launch EC2 Instance**
-
-   * Choose `t2.micro` (Free Tier) or larger as per workload.
-   * Attach an IAM Role with `AmazonS3FullAccess` or a custom minimal policy.
-
-2. **Install Dependencies**
-
-   ```bash
-   sudo apt update
-   sudo apt install python3-pip -y
-   pip install boto3 requests pandas
-   ```
-
-3. **Run the Script**
-
-   ```bash
-   python main.py
-   ```
-
-4. **Output**
-
-   * Converted data automatically uploaded to your S3 bucket.
-   * Logs stored locally for tracking.
+## 💡 Usage
+This dataset can be used for:
+- Time-series price analysis of agricultural commodities  
+- Market trend prediction and forecasting  
+- Supply chain and policy research  
+- Visualization of regional price variations across states and districts
 
 ---
 
-## 🧾 Example Script Outline (`main.py`)
-
-```python
-import requests, boto3, json
-
-# Fetch data
-url = "https://example-indian-api.com/data"
-response = requests.get(url)
-data = response.json()
-
-# Convert/Process data
-converted = [{"name": d["item"], "price": d["value"]} for d in data]
-
-# Upload to S3
-s3 = boto3.client('s3')
-s3.put_object(
-    Bucket="converted-data-bucket",
-    Key="converted_data.json",
-    Body=json.dumps(converted)
-)
-print("Converted data uploaded successfully!")
-```
-
----
-
-## 📊 Monitoring & Scaling
-
-* Use **CloudWatch** to monitor EC2 usage and API latency.
-* Automate uploads with **cron jobs** or **AWS Lambda** triggers.
-* Archive older data with **S3 Glacier** to save cost.
-
----
-
-## 📈 Future Enhancements
-
-* Integrate **AWS Glue** for ETL automation.
-* Use **Athena** for querying converted data directly from S3.
-* Add **error handling and retry mechanisms** for API reliability.
-
----
-
-## 👤 Author
-
-**Vijay Takbhate**
-📍 Data Science Enthusiast | AWS Practitioner
-🔗 [LinkedIn](https://www.linkedin.com/in/vijay-takbhate-b9231a236/)
-
----
-
-Would you like me to include a **cost breakdown table (in INR and USD)** in the README as well?
+📅 **Data Range:** 2001–2025  
+📈 **Records:** 75M+  
+🌾 **Commodities:** 374  
+🏪 **Markets (Mandis):** 1,500+
