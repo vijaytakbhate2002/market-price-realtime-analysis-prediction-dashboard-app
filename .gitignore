@@ -1,0 +1,8 @@
+credentials
+test.py
+.env
+dev_env
+prod_env
+env
+data/
+logs.log
