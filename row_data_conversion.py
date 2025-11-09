@@ -113,4 +113,4 @@ if __name__ == "__main__":
 
     )
 
-    data_builder.getData(latest_files=15)
+    data_builder.getData(latest_files=4)

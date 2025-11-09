@@ -1,4 +1,7 @@
 {
     "row_read_folder_path":"data/versions/18/csv",
-    "row_write_folder_path":"data/versions/18/tables"
+    "row_write_folder_path":"data/versions/18/tables",
+    "processed_data_path": "data/versions/18/tables/processed_data/",
+    "cat_cols": ["State", "District", "Market", "Commodity", "Variety", "Grade", "Arrival_Date"],
+    "num_cols":  ["Min_Price", "Max_Price", "Modal_Price", "Commodity_Code"]
 }

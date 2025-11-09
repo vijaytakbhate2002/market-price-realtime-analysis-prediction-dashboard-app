@@ -2,6 +2,7 @@ from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler, M
 import pandas as pd
 from typing import Union
 import joblib
+import os
 import json
 
 processing_configs = json.load(open("src/processing_config.json"))
@@ -105,7 +106,7 @@ class EncodelData:
         elif self.method == "label":
             for col in self.cat_cols:
                 X_copy[col] = self.encoder[col].transform(X_copy[col])
-                joblib.dump(self.encoder, os.path.join(processing_configs['label_encoder_folder_path'], col + '.pkl'))
+                joblib.dump(self.encoder[col], os.path.join(processing_configs['label_encoder_folder_path'], col + '.pkl'))
 
         return X_copy
 

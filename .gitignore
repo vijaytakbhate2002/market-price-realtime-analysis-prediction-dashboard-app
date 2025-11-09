@@ -6,3 +6,4 @@ prod_env
 env
 data/
 logs.log
+test.csv
