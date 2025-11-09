@@ -11,7 +11,7 @@ sys.path.extend([SRC_PATH, PROJECT_ROOT])
 
 from data_processing_pipeline import processData
 from inverse_data_processing_pipeline import inverseProcessData
-configs = json.load(open(os.path.join(PROJECT_ROOT, "configs.json")))
+configs = json.load(open(os.path.join(PROJECT_ROOT, "config.json")))
 
 @pytest.fixture(scope="session")
 def test_process_pipelines():
