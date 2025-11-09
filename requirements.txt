@@ -5,3 +5,4 @@ dotenv
 kaggle
 scikit-learn
 pytest
+boto3

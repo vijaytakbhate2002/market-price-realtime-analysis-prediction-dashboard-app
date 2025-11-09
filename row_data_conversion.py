@@ -109,8 +109,8 @@ if __name__ == "__main__":
     data_builder = BuildTable(
         read_folder=row_read_folder_path,
         save_folder_path=row_write_folder_path,
-        compress_level=3
+        compress_level=2
 
     )
 
-    data_builder.getData(latest_files=4)
+    data_builder.getData(latest_files=15)
