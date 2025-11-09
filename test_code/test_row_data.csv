@@ -1,0 +1,80 @@
+State,District,Market,Commodity,Variety,Grade,Arrival_Date,Min_Price,Max_Price,Modal_Price,Commodity_Code
+Karnataka,Dharwad,Hubli (Amaragol),Bengal Gram (Gram)(Whole),Average (Whole),FAQ,2001-01-10,1400,1400,1400,6
+Karnataka,Dharwad,Hubli (Amaragol),Black Gram (Urd Beans)(Whole),Black Gram (Whole),FAQ,2001-01-10,1380,1380,1380,8
+Karnataka,Dharwad,Hubli (Amaragol),Green Gram (Moong)(Whole),Green (Whole),FAQ,2001-01-10,1600,1900,1800,9
+Karnataka,Dharwad,Hubli (Amaragol),Groundnut,Gejje,FAQ,2001-01-10,601,1181,1105,10
+Karnataka,Dharwad,Hubli (Amaragol),Maize,Local,FAQ,2001-01-10,420,445,440,4
+Karnataka,Dharwad,Hubli (Amaragol),Onion,Telagi,FAQ,2001-01-10,50,300,250,23
+Karnataka,Dharwad,Hubli (Amaragol),Onion,Local,FAQ,2001-01-10,50,250,230,23
+Karnataka,Dharwad,Hubli (Amaragol),Onion,Puna,FAQ,2001-01-10,150,350,280,23
+Karnataka,Dharwad,Hubli (Amaragol),Potato,Potato,FAQ,2001-01-10,380,850,600,24
+Karnataka,Dharwad,Hubli (Amaragol),Same/Savi,Same/Savi Local,FAQ,2001-01-10,771,771,771,122
+Karnataka,Dharwad,Hubli (Amaragol),Sunflower,Sunflower,FAQ,2001-01-10,1409,1409,1409,14
+Karnataka,Dharwad,Hubli (Amaragol),Wheat,White,FAQ,2001-01-10,771,771,771,1
+Maharashtra,Kolhapur,Kolhapur,Brinjal,Round,FAQ,2001-01-27,400,750,575,35
+Maharashtra,Kolhapur,Kolhapur,Cauliflower,Other,FAQ,2001-01-27,90,225,150,34
+Maharashtra,Kolhapur,Kolhapur,Coriander (Leaves),Local,FAQ,2001-01-27,600,1000,800,43
+Maharashtra,Kolhapur,Kolhapur,Grapes,Green,Medium,2001-01-27,1200,2500,1850,22
+Maharashtra,Kolhapur,Kolhapur,Orange,Nagpuri,Medium,2001-01-27,800,1100,950,18
+Maharashtra,Kolhapur,Kolhapur,Pineapple,Other,Small,2001-01-27,210,560,400,21
+Maharashtra,Kolhapur,Kolhapur,Apple,Red Gold,Medium,2001-02-08,1750,4000,2875,17
+Maharashtra,Kolhapur,Kolhapur,Brinjal,Round,FAQ,2001-02-08,500,1060,775,35
+Maharashtra,Kolhapur,Kolhapur,Cauliflower,Other,FAQ,2001-02-08,90,345,225,34
+Maharashtra,Kolhapur,Kolhapur,Chikoos (Sapota),Other,Medium,2001-02-08,250,1125,700,71
+Maharashtra,Kolhapur,Kolhapur,Coriander (Leaves),Local,FAQ,2001-02-08,1600,4800,3200,43
+Maharashtra,Kolhapur,Kolhapur,Ginger (Dry),Other,FAQ,2001-02-08,1000,1000,1000,27
+Maharashtra,Kolhapur,Kolhapur,Guar,Other,FAQ,2001-02-08,1400,1700,1550,75
+Maharashtra,Kolhapur,Kolhapur,Gur (Jaggery),Other,FAQ,2001-02-08,1200,1735,1475,74
+Maharashtra,Kolhapur,Kolhapur,Mousambi (Sweet Lime),Other,Medium,2001-02-08,900,2160,1525,77
+Maharashtra,Kolhapur,Kolhapur,Onion,Red,FAQ,2001-02-08,200,620,350,23
+Maharashtra,Kolhapur,Kolhapur,Potato,Other,FAQ,2001-02-08,300,660,500,24
+Maharashtra,Kolhapur,Kolhapur,Tomato,Other,FAQ,2001-02-08,200,500,350,78
+Andhra Pradesh,Vijayanagaram,Vijayanagaram,Black Gram (Urd Beans)(Whole),Desi,FAQ,2001-03-07,750,770,760,8
+Andhra Pradesh,Vijayanagaram,Vijayanagaram,Green Gram (Moong)(Whole),Local (Whole),FAQ,2001-03-07,1600,1800,1700,9
+Andhra Pradesh,Vijayanagaram,Vijayanagaram,Onion,Bellary,FAQ,2001-03-07,400,450,420,23
+Andhra Pradesh,Vijayanagaram,Vijayanagaram,Black Gram (Urd Beans)(Whole),Desi,FAQ,2001-03-08,1500,1700,1600,8
+Andhra Pradesh,Vijayanagaram,Vijayanagaram,Green Gram (Moong)(Whole),Local (Whole),FAQ,2001-03-08,1600,1800,1700,9
+Andhra Pradesh,Vijayanagaram,Vijayanagaram,Onion,Bellary,FAQ,2001-03-08,400,450,420,23
+Nagaland,Kohima,Khuzama,Garlic,Other,FAQ,2001-03-12,4000,5000,4500,25
+Nagaland,Kohima,Khuzama,Ginger (Dry),Other,FAQ,2001-03-12,500,600,550,27
+Nagaland,Kohima,Khuzama,Green Chilli,Other,FAQ,2001-03-12,1000,1500,1200,87
+Nagaland,Kohima,Khuzama,Maize,Local,FAQ,2001-03-12,500,700,600,4
+Nagaland,Kohima,Khuzama,Potato,Other,FAQ,2001-03-12,500,700,600,24
+Nagaland,Kohima,Khuzama,Rice,AP Raw Rice 5293,FAQ,2001-03-12,900,1390,1000,3
+Nagaland,Kohima,Khuzama,Soyabean,Other,FAQ,2001-03-12,1200,1500,1300,13
+Maharashtra,Kolhapur,Kolhapur,Brinjal,Round,FAQ,2001-03-13,235,370,240,35
+Maharashtra,Kolhapur,Kolhapur,Coriander (Leaves),Local,FAQ,2001-03-13,580,800,580,43
+Maharashtra,Kolhapur,Kolhapur,Onion,Red,FAQ,2001-03-13,220,400,220,23
+Tamil Nadu,Cuddalore,Virudhachalam,Black Gram (Urd Beans)(Whole),Rajkot T-9,FAQ,2001-03-13,1869,2462,2359,8
+Tamil Nadu,Cuddalore,Virudhachalam,Groundnut,Bold Kernel,FAQ,2001-03-13,1328,1686,1586,10
+Tamil Nadu,Cuddalore,Virudhachalam,Jowar (Sorghum),H.Y.V.,FAQ,2001-03-13,353,375,370,5
+Tamil Nadu,Cuddalore,Virudhachalam,Rice,Fine,FAQ,2001-03-13,534,564,550,3
+Tamil Nadu,Cuddalore,Virudhachalam,Rice,Coarse,FAQ,2001-03-13,461,528,500,3
+Tamil Nadu,Cuddalore,Virudhachalam,"Sesamum (Sesame,Gingelly,Til)",Crushing,FAQ,2001-03-13,1513,2010,1952,11
+Pondicherry,Pondicherry,Thattanchavady,Black Gram (Urd Beans)(Whole),Rajkot T-9,FAQ,2001-03-14,1305,2358,2344,8
+Pondicherry,Pondicherry,Thattanchavady,Chili Red,Red,FAQ,2001-03-14,171,240,200,26
+Pondicherry,Pondicherry,Thattanchavady,Green Gram (Moong)(Whole),Local (Whole),FAQ,2001-03-14,1760,1815,1769,9
+Pondicherry,Pondicherry,Thattanchavady,Groundnut,Seed,FAQ,2001-03-14,985,1255,1177,10
+Pondicherry,Pondicherry,Thattanchavady,Paddy (Dhan)(Common),Paddy,FAQ,2001-03-14,317,433,390,2
+Pondicherry,Pondicherry,Thattanchavady,Ragi (Finger Millet),Local,FAQ,2001-03-14,560,571,569,30
+Tamil Nadu,Cuddalore,Virudhachalam,Bajra (Pearl Millet/Cumbu),Hybrid,FAQ,2001-03-14,446,454,450,28
+Tamil Nadu,Cuddalore,Virudhachalam,Black Gram (Urd Beans)(Whole),Rajkot T-9,FAQ,2001-03-14,2202,2367,2269,8
+Tamil Nadu,Cuddalore,Virudhachalam,Coriander (Leaves),Local,FAQ,2001-03-14,2447,2777,2672,43
+Tamil Nadu,Cuddalore,Virudhachalam,Groundnut,Big (With Shell),FAQ,2001-03-14,1420,1653,1603,10
+Tamil Nadu,Cuddalore,Virudhachalam,Rice,Coarse,FAQ,2001-03-14,470,525,504,3
+Tamil Nadu,Cuddalore,Virudhachalam,Rice,Fine,FAQ,2001-03-14,534,581,572,3
+Tamil Nadu,Cuddalore,Virudhachalam,"Sesamum (Sesame,Gingelly,Til)",Crushing,FAQ,2001-03-14,1636,2027,1986,11
+Maharashtra,Kolhapur,Kolhapur,Brinjal,Round,FAQ,2001-03-15,375,600,375,35
+Maharashtra,Kolhapur,Kolhapur,Coriander (Leaves),Local,FAQ,2001-03-15,500,600,500,43
+Maharashtra,Kolhapur,Kolhapur,Onion,Red,FAQ,2001-03-15,220,410,220,23
+Pondicherry,Pondicherry,Thattanchavady,Black Gram (Urd Beans)(Whole),Rajkot T-9,FAQ,2001-03-15,2189,2318,2305,8
+Pondicherry,Pondicherry,Thattanchavady,Green Gram (Moong)(Whole),Local (Whole),FAQ,2001-03-15,1506,1796,1796,9
+Pondicherry,Pondicherry,Thattanchavady,Groundnut,Seed,FAQ,2001-03-15,1080,1263,1218,10
+Pondicherry,Pondicherry,Thattanchavady,Paddy (Dhan)(Common),Paddy,FAQ,2001-03-15,372,434,406,2
+Pondicherry,Pondicherry,Thattanchavady,Ragi (Finger Millet),Local,FAQ,2001-03-15,506,516,510,30
+Tamil Nadu,Villupuram,Ulundurpettai,Bajra (Pearl Millet/Cumbu),Hybrid,FAQ,2001-03-15,470,479,475,28
+Tamil Nadu,Villupuram,Ulundurpettai,Black Gram (Urd Beans)(Whole),Rajkot T-9,FAQ,2001-03-15,1989,2389,2100,8
+Tamil Nadu,Villupuram,Ulundurpettai,Groundnut,Big (With Shell),FAQ,2001-03-15,1415,1696,1500,10
+Tamil Nadu,Villupuram,Ulundurpettai,Jowar (Sorghum),H.Y.V.,FAQ,2001-03-15,370,370,370,5
+Tamil Nadu,Villupuram,Ulundurpettai,Ragi (Finger Millet),Red,FAQ,2001-03-15,479,483,481,30
+Tamil Nadu,Villupuram,Ulundurpettai,Rice,Coarse,FAQ,2001-03-15,453,490,473,3

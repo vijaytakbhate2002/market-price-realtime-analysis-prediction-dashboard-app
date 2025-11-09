@@ -7,3 +7,5 @@ env
 data/
 logs.log
 test.csv
+temp.py
+temp.ipynb
