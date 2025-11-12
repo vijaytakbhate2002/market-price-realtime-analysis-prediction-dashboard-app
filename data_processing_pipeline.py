@@ -41,8 +41,24 @@ def processData(df:pd.DataFrame, num_impute_method:str='mean', scale_method:str=
 
 if __name__ == "__main__":
     # df = pd.read_csv(os.path.join(configs["row_write_folder_path"], "market_prices_20251108-152737.csv"))
-    df = pd.read_csv(os.path.join(configs["row_write_folder_path"], "market_prices_20251109-103741.csv"))
+    # df = pd.read_csv(os.path.join(configs["row_write_folder_path"], "market_prices_20251109-103741.csv"))
+    #
+    # processed_data = processData(df)
+    # print(processed_data.head())
+    # processed_data.to_csv(os.path.join(configs["processed_data_path"], 'processed_data.csv'), index=False)
 
-    processed_data = processData(df)
-    print(processed_data.head())
-    processed_data.to_csv(os.path.join(configs["processed_data_path"], 'processed_data.csv'), index=False)
+    from src.s3_operations import S3BucketHandler
+
+    s3_handler = S3BucketHandler(
+        bucket_name = configs["bucket_name"]
+    )
+
+    s3_handler.removeFromS3(file_key=configs["processed_file_key"], last_rows_num=-1)
+    for data in s3_handler.readS3DataStreaming(file_key=configs["file_key"], nrows=50, totalrows=79):
+        processed_data = processData(df=data, num_impute_method="mean", scale_method="minmax", encoder_method="label")
+        s3_handler.appendToS3StreamCSV(file_key=configs["processed_file_key"], new_data_df=processed_data)
+
+    df = s3_handler.readS3Data(file_key=configs["processed_file_key"], nrows=-1)
+    df.to_csv("processed_data_50_rows.csv", index=False)
+
+

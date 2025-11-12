@@ -26,6 +26,9 @@ class S3BucketHandler:
         Args:
             file_key: path of the file to read.
             nrows: number of rows to read | pass -1 to access full data.
+
+        Returns:
+            return first {nrows} rows of data read from S3 bucket.
         """
 
         logging.info(f"Reading data from S3 bucket with {nrows}, {file_key}, {self.bucket_name} ...")
@@ -126,6 +129,40 @@ class S3BucketHandler:
 
         except Exception as e:
             logging.error(f"❌ Failed to update '{file_key}' in S3: {e}")
+
+
+
+    def readCsvRange(path, ranges):
+        dfs = []
+        for start, end in ranges:
+            df_part = pd.read_csv(path, skiprows=range(1, start + 1), nrows=end - start)
+            dfs.append(df_part)
+        return pd.concat(dfs, ignore_index=True)
+
+
+
+    def readS3DataStreaming(self, file_key:str, nrows:int, totalrows:int):
+        """
+        Args:
+            file_key: path of the file to read.
+            nrows: number of rows to read | pass -1 to access full data.
+
+        Returns:
+            Straming batchwise data where batchsize=nrows.
+        """
+
+        if totalrows < nrows:
+            logging.warning(f"Entered {nrows} nrows are more than {totalrows} totalrows of the data")
+            return Warning(f"Entered {nrows} nrows are more than {totalrows} totalrows of the data")
+
+        batch_size = totalrows // nrows if totalrows % nrows == 0 else totalrows // nrows + 1
+
+        for batch in range(batch_size):
+            logging.info(f"Reading data from S3 bucket with {nrows}, {file_key}, {self.bucket_name} ...")
+            response = self.s3.get_object(Bucket=self.bucket_name, Key=file_key)
+            logging.info(f"Reading range(1, batch * nrows + 1) {range(1, batch * nrows + 1),}, batch number {batch}, batch_size {batch_size}, with nrows {nrows} and totalrows {totalrows} ...")
+            data = pd.read_csv(response["Body"], skiprows=range(1, batch * nrows + 1), nrows=nrows)
+            yield data
 
 
 
