@@ -1,19 +1,27 @@
 import pandas as pd
 from sklearn.pipeline import Pipeline
 from src.data_processing import ScaleData, EncodelData, Imputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, MinMaxScaler
 import os
 import json
+from typing import Union
+from src.s3_operations import S3BucketHandler
 configs = json.load(open("config.json"))
 
 
 
-def processData(df:pd.DataFrame, num_impute_method:str='mean', scale_method:str='minmax', encoder_method:str='label') -> pd.DataFrame:
+def processData(df:pd.DataFrame, num_impute_method:str='mean', scale_method:str='minmax', encoder_method:str='label', scaler:Union[None, StandardScaler, MinMaxScaler]=None, encoder:Union[None, dict, OneHotEncoder]=None) -> pd.DataFrame:
     """
     Args:
         df: unprocessed data
         num_impute_method: Choose impute method from ('mean', 'median', 'mode')
         scale_method: Choose scaling method from ('minmax', 'standard')
         encoder_method: Choose encoder method from ('label', 'onehot')
+
+        scaler: Pass None if you want to create new scaler while processing data else pass fitted StandardScaler or MinmaxScaler.
+        encoder: Pass None if you want to create new encoder while processing data 
+                for 'label' method pass dictionary of column as key and respective fitted label encoder,
+                for 'onehot' method pass fitted OneHotEncoder
 
     Description: This function will apply encoding techniques for categorical data and scaling techniques for numerical data
 
@@ -26,8 +34,8 @@ def processData(df:pd.DataFrame, num_impute_method:str='mean', scale_method:str=
 
     pipeline_steps = [
         ("imputer", Imputer(cat_cols=cat_cols, num_cols=num_cols, num_method=num_impute_method)),
-        ("scaler", ScaleData(num_cols=num_cols, method=scale_method)),
-        ("encoder", EncodelData(cat_cols=cat_cols, method=encoder_method))
+        ("scaler", ScaleData(num_cols=num_cols, method=scale_method, scaler=scaler)),
+        ("encoder", EncodelData(cat_cols=cat_cols, method=encoder_method, encoder=encoder))
         ]
 
     processing_pipeline = Pipeline(
@@ -39,26 +47,67 @@ def processData(df:pd.DataFrame, num_impute_method:str='mean', scale_method:str=
 
 
 
-if __name__ == "__main__":
-    # df = pd.read_csv(os.path.join(configs["row_write_folder_path"], "market_prices_20251108-152737.csv"))
-    # df = pd.read_csv(os.path.join(configs["row_write_folder_path"], "market_prices_20251109-103741.csv"))
-    #
-    # processed_data = processData(df)
-    # print(processed_data.head())
-    # processed_data.to_csv(os.path.join(configs["processed_data_path"], 'processed_data.csv'), index=False)
+def runProcessingPipeline(num_impute_method:str='mean', scale_method:str='minmax', encoder_method:str='label', scaler=Union[None, StandardScaler, MinMaxScaler], encoder:Union[None, dict, OneHotEncoder]=None) -> None:
+    """
+    Args:
+        df: unprocessed data
+        num_impute_method: Choose impute method from ('mean', 'median', 'mode')
+        scale_method: Choose scaling method from ('minmax', 'standard')
+        encoder_method: Choose encoder method from ('label', 'onehot')
 
-    from src.s3_operations import S3BucketHandler
+        scaler: Pass None if you want to create new scaler while processing data else pass fitted StandardScaler or MinmaxScaler.
+        encoder: Pass None if you want to create new encoder while processing data 
+                for 'label' method pass dictionary of column as key and respective fitted label encoder,
+                for 'onehot' method pass fitted OneHotEncoder
+
+    Description: This function will apply encoding techniques for categorical data and scaling techniques for numerical data
+
+    Returns:
+        df: processed data
+    """
 
     s3_handler = S3BucketHandler(
-        bucket_name = configs["bucket_name"]
+        bucket_name=configs["bucket_name"]
     )
 
     s3_handler.removeFromS3(file_key=configs["processed_file_key"], last_rows_num=-1)
-    for data in s3_handler.readS3DataStreaming(file_key=configs["file_key"], nrows=50, totalrows=79):
-        processed_data = processData(df=data, num_impute_method="mean", scale_method="minmax", encoder_method="label")
-        s3_handler.appendToS3StreamCSV(file_key=configs["processed_file_key"], new_data_df=processed_data)
+    data = s3_handler.readS3Data(file_key=configs['all_row_data_key'], nrows=-1)
+    processed_data = processData(df=data, num_impute_method="mean", scale_method="minmax", encoder_method="label")
+    s3_handler.appendToS3StreamCSV(file_key=configs["processed_file_key"], new_data_df=processed_data)
+
+    # for data in s3_handler.readS3DataStreaming(file_key=configs["test_row_data_key"], nrows=50, totalrows=79):
+    #     processed_data = processData(df=data, num_impute_method="mean", scale_method="minmax", encoder_method="label")
+    #     s3_handler.appendToS3StreamCSV(file_key=configs["processed_file_key"], new_data_df=processed_data)
 
     df = s3_handler.readS3Data(file_key=configs["processed_file_key"], nrows=-1)
-    df.to_csv("processed_data_50_rows.csv", index=False)
+    df.to_csv("processed_data_all_rows.csv", index=False)
+
+
+
+if __name__ == "__main__":
+    import joblib
+    import os
+    import json
+
+    configs = json.load(open("config.json"))
+    processing_configs = json.load(open("src/processing_config.json"))
+    encoders = {}
+
+    for col_name in os.listdir(processing_configs['label_encoder_folder_path']):
+        encoders[col_name.replace('.pkl', '')] = joblib.load(os.path.join(processing_configs['label_encoder_folder_path'], col_name))
+
+    # runProcessingPipeline(
+    #     num_impute_method='mean',
+    #     scale_method='minmax',
+    #     encoder_method='label',
+    #     scaler = joblib.load(open(configs['label_encoder_folder_path'])),
+    #     encoder = encoders
+    # )
+
+    runProcessingPipeline(
+        num_impute_method='mean',
+        scale_method='minmax',
+        encoder_method='label'
+    )
 
 

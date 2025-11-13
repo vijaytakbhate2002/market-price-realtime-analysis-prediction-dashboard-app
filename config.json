@@ -1,12 +1,21 @@
 {
-    "row_read_folder_path":"data/versions/18/csv",
-    "row_write_folder_path":"data/versions/18/tables",
-    "processed_data_path": "data/versions/18/tables/processed_data/",
+  "row_read_folder_path": "data/versions/18/csv",
+  "row_write_folder_path": "data/versions/18/tables",
+  "processed_data_path": "data/versions/18/tables/processed_data/",
 
-    "bucket_name": "market-price-data-vijay-takbhate",
-    "file_key" : "test_row_data.csv",
-    "processed_file_key": "processed_data.csv",
+  "bucket_name": "market-price-data-vijay-takbhate",
+  "test_row_data_key": "test_row_data.csv",
+  "all_row_data_key": "market_prices_20251109-140051.csv",
+  "processed_file_key": "processed_data.csv",
 
-    "cat_cols": ["State", "District", "Market", "Commodity", "Variety", "Grade", "Arrival_Date"],
-    "num_cols":  ["Min_Price", "Max_Price", "Modal_Price", "Commodity_Code"]
+  "cat_cols": [
+    "State",
+    "District",
+    "Market",
+    "Commodity",
+    "Variety",
+    "Grade",
+    "Arrival_Date"
+  ],
+  "num_cols": ["Min_Price", "Max_Price", "Modal_Price", "Commodity_Code"]
 }
