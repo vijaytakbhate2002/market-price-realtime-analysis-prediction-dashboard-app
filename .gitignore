@@ -9,3 +9,5 @@ logs.log
 test.csv
 temp.py
 temp.ipynb
+*.csv
+*.xlsx
