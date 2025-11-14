@@ -50,7 +50,8 @@ class ScaleData:
         logging.info("Transforming numeric columns using fitted scaler.")
         X_copy = X.copy()
         scaled_values = self.scaler.transform(X_copy[self.num_cols])
-        joblib.dump(self.scaler, processing_configs['scaler_file_path'])
+        if not self.scaler_passed:
+            joblib.dump(self.scaler, processing_configs['scaler_file_path'])
         logging.info("Scaler object saved to %s", processing_configs['scaler_file_path'])
         X_copy[self.num_cols] = pd.DataFrame(
             scaled_values, columns=self.num_cols, index=X_copy.index
@@ -112,7 +113,8 @@ class EncodelData:
 
         if self.method == "onehot":
             encoded_array = self.encoder.transform(X_copy[self.cat_cols])
-            joblib.dump(self.encoder, processing_configs['one_hot_encoder_file_path'])
+            if not self.encoder_passed:
+                joblib.dump(self.encoder, processing_configs['one_hot_encoder_file_path'])
             logging.info("OneHotEncoder object saved to %s", processing_configs['one_hot_encoder_file_path'])
             encoded_df = pd.DataFrame(
                 encoded_array,

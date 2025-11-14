@@ -7,6 +7,7 @@
   "test_row_data_key": "test_row_data.csv",
   "all_row_data_key": "market_prices_20251109-140051.csv",
   "processed_file_key": "processed_data.csv",
+  "batch_processed_file_key": "batch_processed_file_key",
 
   "cat_cols": [
     "State",
