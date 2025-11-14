@@ -47,7 +47,7 @@ def processData(df:pd.DataFrame, num_impute_method:str='mean', scale_method:str=
 
 
 
-def runProcessingPipeline(num_impute_method:str='mean', scale_method:str='minmax', encoder_method:str='label', scaler=Union[None, StandardScaler, MinMaxScaler], encoder:Union[None, dict, OneHotEncoder]=None) -> None:
+def runProcessingPipeline(data:pd.DataFrame, num_impute_method:str='mean', scale_method:str='minmax', encoder_method:str='label', scaler=Union[None, StandardScaler, MinMaxScaler], encoder:Union[None, dict, OneHotEncoder]=None) -> None:
     """
     Args:
         df: unprocessed data
@@ -70,19 +70,22 @@ def runProcessingPipeline(num_impute_method:str='mean', scale_method:str='minmax
         bucket_name=configs["bucket_name"]
     )
 
-    # s3_handler.removeFromS3(file_key=configs["processed_file_key"], last_rows_num=-1)
+    s3_handler.removeFromS3(file_key=configs["batch_processed_file_key"], last_rows_num=-1)
     # data = s3_handler.readS3Data(file_key=configs['all_row_data_key'], nrows=-1)
     # processed_data = processData(df=data, num_impute_method="mean", scale_method="minmax", encoder_method="label")
     # s3_handler.appendToS3StreamCSV(file_key=configs["processed_file_key"], new_data_df=processed_data)
 
-    for data in s3_handler.readS3DataStreaming(file_key=configs["all_row_data_key"], nrows=100, totalrows=10000):
+    for data in s3_handler.readS3DataStreaming(file_key=configs["all_row_data_key"], nrows=100, totalrows=5000):
         processed_data = processData(df=data, num_impute_method="mean", scale_method="minmax", encoder_method="label", scaler=scaler, encoder=encoder)
         s3_handler.appendToS3StreamCSV(file_key=configs["batch_processed_file_key"], new_data_df=processed_data)
 
     # df = s3_handler.readS3Data(file_key=configs["processed_file_key"], nrows=-1)
     # df.to_csv("processed_data_all_rows.csv", index=False)
-    full_processed_df = s3_handler.readS3Data(file_key=configs["processed_file_key"], nrows=-1)
-    batch_processed_df = s3_handler.readS3Data(file_key=configs["batch_processed_file_key"], nrows=-1)
+    # full_processed_df = s3_handler.readS3Data(file_key=configs["processed_file_key"], nrows=5000)
+    # batch_processed_df = s3_handler.readS3Data(file_key=configs["batch_processed_file_key"], nrows=-1)
+
+    # full_processed_df.to_csv("full_processed_df.csv", index=False)
+    # batch_processed_df.to_csv("batch_processed_df.csv", index=False)
 
 
 
@@ -90,6 +93,8 @@ if __name__ == "__main__":
     import joblib
     import os
     import json
+
+    data = pd.read_csv(os.path.join(configs['row_write_folder_path'], configs['all_row_data_key']))
 
     configs = json.load(open("config.json"))
     processing_configs = json.load(open("src/processing_config.json"))
@@ -103,7 +108,8 @@ if __name__ == "__main__":
         scale_method='minmax',
         encoder_method='label',
         scaler = joblib.load(processing_configs['scaler_file_path']),
-        encoder = encoders
+        encoder = encoders,
+        data = data
     )
 
     # runProcessingPipeline(

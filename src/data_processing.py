@@ -127,8 +127,9 @@ class EncodelData:
         elif self.method == "label":
             for col in self.cat_cols:
                 X_copy[col] = self.encoder[col].transform(X_copy[col])
-                joblib.dump(self.encoder[col], os.path.join(processing_configs['label_encoder_folder_path'], col + '.pkl'))
-                logging.info("LabelEncoder for column '%s' saved successfully.", col)
+                if not self.encoder_passed:
+                    joblib.dump(self.encoder[col], os.path.join(processing_configs['label_encoder_folder_path'], col + '.pkl'))
+                    logging.info("LabelEncoder for column '%s' saved successfully.", col)
 
         logging.info("Categorical encoding transformation completed.")
         return X_copy
