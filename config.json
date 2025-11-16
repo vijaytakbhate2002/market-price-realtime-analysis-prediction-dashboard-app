@@ -9,14 +9,7 @@
   "processed_file_key": "processed_data.csv",
   "batch_processed_file_key": "batch_processed_file_key",
 
-  "cat_cols": [
-    "State",
-    "District",
-    "Market",
-    "Commodity",
-    "Variety",
-    "Grade",
-    "Arrival_Date"
-  ],
-  "num_cols": ["Min_Price", "Max_Price", "Modal_Price", "Commodity_Code"]
+  "cat_cols": ["State", "District", "Market", "Commodity", "Variety", "Grade"],
+  "num_cols": ["Min_Price", "Max_Price", "Modal_Price"],
+  "total_data_rows": 30032282
 }
