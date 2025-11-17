@@ -83,7 +83,7 @@ def runProcessingPipeline(totalrows:int, batch_size:int, num_impute_method:str='
         bucket_name=configs["bucket_name"]
     )
 
-    s3_handler.removeFromS3(file_key=configs["batch_processed_file_key"], last_rows_num=-1)
+    # s3_handler.removeFromS3(file_key=configs["batch_processed_file_key"], last_rows_num=-1)
     for df_temp in s3_handler.readS3DataStreaming(file_key=configs["all_row_data_key"], nrows=batch_size, totalrows=totalrows):
         processed_data = processData(df=df_temp, num_impute_method=num_impute_method, scale_method=scale_method, encoder_method=encoder_method, scaler=scaler, encoder=encoder)
         s3_handler.appendToS3StreamCSV(file_key=configs["batch_processed_file_key"], new_data_df=processed_data)
